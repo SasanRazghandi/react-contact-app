@@ -1,11 +1,13 @@
 import { useState } from "react";
 import ContactList from "./ContactList";
 import inputs from "../constants/inputs";
+import {v4 as uuidv4} from "uuid";
 
 function Form() {
 
 	const [contacts, setContacts] = useState([]);
 	const [contact, setContact] = useState({
+		id: "",
 		name: "",
 		lastName: "",
 		email: "",
@@ -28,7 +30,8 @@ function Form() {
 		}
 
 		setAlert("");
-		setContacts((contacts) => ([...contacts, contact]));
+		const newContact = {...contact, id: uuidv4()};
+		setContacts((contacts) => ([...contacts, newContact]));
 		setContact({
 			name: "",
 			lastName: "",
